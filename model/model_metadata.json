@@ -1,0 +1,144 @@
+{
+    "project_name": "Smart Outcome Predictor",
+    "version": "1.0.0",
+    "feature_columns": [
+        "age",
+        "week_of_year",
+        "sessions",
+        "time_spent_hours",
+        "videos_watched",
+        "quiz_attempts",
+        "assignments_submitted",
+        "forum_posts",
+        "avg_quiz_score",
+        "attendance_rate",
+        "country_region_Americas",
+        "country_region_Asia",
+        "country_region_Europe",
+        "country_region_Oceania",
+        "device_type_Mobile",
+        "device_type_Tablet",
+        "education_background_HighSchool",
+        "education_background_Undergrad",
+        "education_background_WorkingPro",
+        "course_level_Beginner",
+        "course_level_Intermediate",
+        "course_category_Data",
+        "course_category_Design",
+        "course_category_Marketing",
+        "course_category_Programming"
+    ],
+    "target_variables": {
+        "classification": "completion_status",
+        "regression": "final_score"
+    },
+    "best_models": {
+        "classification": "StackingClassifier (DecisionTree + AdaBoost + XGBoost -> LogisticRegression)",
+        "regression": "XGBRegressor"
+    },
+    "classification_metrics": {
+        "Single Decision Tree": {
+            "Accuracy": 0.7029,
+            "Precision": 0.6588,
+            "Recall": 0.4308,
+            "F1-Score": 0.5209,
+            "ROC-AUC": 0.7547
+        },
+        "Bagging Classifier": {
+            "Accuracy": 0.7327,
+            "Precision": 0.6761,
+            "Recall": 0.5513,
+            "F1-Score": 0.6073,
+            "ROC-AUC": 0.7792
+        },
+        "AdaBoost Classifier": {
+            "Accuracy": 0.726,
+            "Precision": 0.6606,
+            "Recall": 0.5538,
+            "F1-Score": 0.6025,
+            "ROC-AUC": 0.7862
+        },
+        "XGBoost Classifier": {
+            "Accuracy": 0.7279,
+            "Precision": 0.656,
+            "Recall": 0.5769,
+            "F1-Score": 0.6139,
+            "ROC-AUC": 0.7835
+        },
+        "Hard Voting": {
+            "Accuracy": 0.7413,
+            "Precision": 0.6921,
+            "Recall": 0.559,
+            "F1-Score": 0.6184,
+            "ROC-AUC": NaN
+        },
+        "Soft Voting": {
+            "Accuracy": 0.7308,
+            "Precision": 0.6687,
+            "Recall": 0.559,
+            "F1-Score": 0.6089,
+            "ROC-AUC": 0.7828
+        },
+        "Stacking Classifier": {
+            "Accuracy": 0.7375,
+            "Precision": 0.6834,
+            "Recall": 0.559,
+            "F1-Score": 0.615,
+            "ROC-AUC": 0.7887
+        }
+    },
+    "regression_metrics": {
+        "Single Decision Tree": {
+            "MAE": 8.6966,
+            "RMSE": 10.7553,
+            "R2 Score": 0.3809
+        },
+        "Bagging Regressor": {
+            "MAE": 8.107,
+            "RMSE": 10.0763,
+            "R2 Score": 0.4566
+        },
+        "AdaBoost Regressor": {
+            "MAE": 8.5264,
+            "RMSE": 10.5031,
+            "R2 Score": 0.4096
+        },
+        "XGBoost Regressor": {
+            "MAE": 7.8838,
+            "RMSE": 9.8226,
+            "R2 Score": 0.4836
+        },
+        "Stacking Regressor": {
+            "MAE": 7.8935,
+            "RMSE": 9.8288,
+            "R2 Score": 0.483
+        }
+    },
+    "sample_test_input": {
+        "age": 32,
+        "week_of_year": 12,
+        "sessions": 1,
+        "time_spent_hours": 7.6,
+        "videos_watched": 1,
+        "quiz_attempts": 6,
+        "assignments_submitted": 1,
+        "forum_posts": 1,
+        "avg_quiz_score": 53.3,
+        "attendance_rate": 0.655,
+        "country_region_Americas": false,
+        "country_region_Asia": false,
+        "country_region_Europe": true,
+        "country_region_Oceania": false,
+        "device_type_Mobile": false,
+        "device_type_Tablet": false,
+        "education_background_HighSchool": false,
+        "education_background_Undergrad": true,
+        "education_background_WorkingPro": false,
+        "course_level_Beginner": false,
+        "course_level_Intermediate": true,
+        "course_category_Data": false,
+        "course_category_Design": false,
+        "course_category_Marketing": false,
+        "course_category_Programming": false
+    }
+}
