@@ -98,12 +98,43 @@ if submitted:
     completed = int(clf.predict(X)[0])
     score = max(0.0, min(100.0, float(reg.predict(X)[0])))
 
-    st.subheader("Prediction")
-    r1, r2 = st.columns(2)
-    r1.metric("Completion", "Will complete" if completed else "Will not complete",
-              f"{prob:.1%} probability", delta_color="off")
-    r2.metric("Final score", f"{score:.1f} / 100")
-    if completed:
-        st.success("Student likely completes the course.")
+    st.divider()
+    st.subheader("Prediction Result")
+
+    # Grade band for the predicted score
+    if score >= 80:
+        grade, band = "Excellent", "#1a7f37"
+    elif score >= 60:
+        grade, band = "Good", "#2f6fdb"
+    elif score >= 40:
+        grade, band = "Average", "#b7791f"
     else:
-        st.warning("Student at risk of not completing.")
+        grade, band = "Needs improvement", "#c62828"
+
+    status_color = "#1a7f37" if completed else "#c62828"
+    status_text = "Likely to Complete" if completed else "At Risk of Not Completing"
+
+    def card(title, value, sub, color):
+        return (
+            f"<div style='border:1px solid rgba(128,128,128,.3);border-left:6px solid {color};"
+            f"border-radius:8px;padding:16px 20px;'>"
+            f"<div style='font-size:.85rem;opacity:.7;text-transform:uppercase;"
+            f"letter-spacing:.05em;'>{title}</div>"
+            f"<div style='font-size:1.7rem;font-weight:700;color:{color};margin:4px 0;'>{value}</div>"
+            f"<div style='font-size:.9rem;opacity:.8;'>{sub}</div></div>"
+        )
+
+    r1, r2 = st.columns(2)
+    with r1:
+        st.markdown(card("Course completion", status_text,
+                         f"Completion probability: {prob:.1%}", status_color),
+                    unsafe_allow_html=True)
+        st.progress(min(max(prob, 0.0), 1.0))
+    with r2:
+        st.markdown(card("Predicted final score", f"{score:.1f} / 100",
+                         f"Performance: {grade}", band),
+                    unsafe_allow_html=True)
+        st.progress(min(max(score / 100.0, 0.0), 1.0))
+
+    st.caption("Predictions come from a machine-learning model trained on historical "
+               "course data and are estimates, not guarantees.")
